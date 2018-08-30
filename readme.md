@@ -1,7 +1,7 @@
 
 #### 目录
 - 一、MVC框架<br>
-[1.springMVC](https://github.com/Streamhu/spring_integration/blob/master/readme.md#springMVC)
+[1.springMVC](https://github.com/Streamhu/spring_integration/blob/master/readme.md#spring1)
 - 二、持久层框架<br>
 [1.mybatis](#mybatis)<br>
 [2.hibernate](#hibernate)
@@ -14,7 +14,7 @@
 - 五、校验框架<br>
 [1.hibernate validator](#validator)<br>
 #### springMVC
-#### test1
+#### spring1
 ### 一、MVC框架
 #### springMVC
 ##### 1）引入相关jar包
