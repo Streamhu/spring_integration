@@ -1,24 +1,24 @@
 
 #### 目录
 - 一、MVC框架<br>
-[1.springMVC](https://github.com/Streamhu/spring_integration/blob/master/readme.md#springMVC)
+[1.springMVC](https://github.com/Streamhu/spring_integration/blob/master/readme.md#springmvc)
 - 二、持久层框架<br>
 [1.mybatis](https://github.com/Streamhu/spring_integration/blob/master/readme.md#mybatis)<br>
-[2.hibernate](#hibernate)
+[2.hibernate](https://github.com/Streamhu/spring_integration/blob/master/readme.md#hibernate)
 - 三、缓存<br>
-[1.redis](#redis)<br>
-[2.ehcache](#ehcache)<br>
+[1.redis](https://github.com/Streamhu/spring_integration/blob/master/readme.md#redis)<br>
+[2.ehcache](https://github.com/Streamhu/spring_integration/blob/master/readme.md#ehcache)<br>
 - 四、定时任务<br>
-[1.spring-task](#spring-task)<br>
-[2.quartz](#quartz)<br>
+[1.spring-task](https://github.com/Streamhu/spring_integration/blob/master/readme.md#spring-task)<br>
+[2.quartz](https://github.com/Streamhu/spring_integration/blob/master/readme.md#quartz)<br>
 - 五、校验框架<br>
-[1.hibernate validator](#validator)<br>
+[1.hibernate validator](https://github.com/Streamhu/spring_integration/blob/master/readme.md#validator)<br>
 
 
 
 ### 一、MVC框架
 
-#### springMVC
+### springmvc
 
 ##### 1）引入相关jar包
 ```
@@ -114,7 +114,9 @@ public class SpringmvcController {
 <hr>
 
 ### 二、持久层框架
-#### mybatis
+
+### mybatis
+
 ##### 1）引入相关jar包
 ```
 <!-- mybatis -->
@@ -220,7 +222,8 @@ jdbc.password=
 
 <hr>
 
-#### <span id="hibernate">2.hibernate</span>
+### hibernate
+
 ##### 1)引入相关jar包	
 ```
 <!-- hibernate核心包 -->
@@ -350,7 +353,9 @@ public class HibernateUserDao {
 <hr>
 
 ### 三、缓存
-#### <span id="redis">1.redis(有3种方式，目前用的是redisTemplate)</span>
+
+### redis
+
 ##### 1) 引入相关jar包
 ```
 <!-- redis -->
@@ -480,7 +485,8 @@ public class RedisTemplateController {
 
 <hr>
 
-#### <span id="ehcache">2. ehcache</span>
+### ehcache
+
 ##### 1) 引入相关jar包
 ```
 <!-- ehcache 相关依赖  -->
@@ -585,7 +591,9 @@ public class EhcacheController {
 <hr>
 
 ### 四、定时任务
-#### <span id="spring-task">1.spring-task</span>
+
+### spring-task
+
 ##### 1）不需要引用jar包，spring直接有的，新建spring-task.xml文件
 ```
 <!-- 自动扫描的包名 -->
@@ -624,7 +632,8 @@ public class SpringTaskAnnotationController {
 
 <hr>
 
-#### <span id="quartz">2. quartz</span>
+### quartz
+
 ##### 1)引入相关jar包
 ```
 <!-- quartz相关依赖-->
@@ -686,7 +695,9 @@ public class QuartzController {
 <hr>
 
 ### 五、校验框架
-##### <span id="validator">1.hibernate validator</span>
+
+### validator
+
 ##### 1）不需要jar包，直接在springMVC.xml文件中添加如下配置
 ```
 <!-- 校验器 -->
