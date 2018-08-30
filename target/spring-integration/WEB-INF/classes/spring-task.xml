@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!-- 自动扫描的包名 -->
+    <context:component-scan base-package="com.hh.springTask" ></context:component-scan>
+
+    <!-- 不是必配项，但是Spring scheduled-tasks默认是串行执行，时常发生task任务太多，而导致执行任务排队等待，此时就需要配置并行执行 -->
+    <task:executor id="executor" pool-size="5" />
+    <task:scheduler id="scheduler" pool-size="10" />
+
+    <!-- 开启任务注解 -->
+    <task:annotation-driven executor="executor" scheduler="scheduler" />
+
+    <!-- 任务列表(这是xml配置，注解配置是直接在类中写corn表达式) -->
+    <bean id="springTaskController" class="com.hh.springTask.SpringTaskController" />
+
+    <task:scheduled-tasks>
+        <task:scheduled ref="springTaskController" method="firstCron" cron="0 0 0 * * ?"/>
+    </task:scheduled-tasks>
+
+
+</beans>

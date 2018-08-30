@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
+       default-autowire="byName">
+
+
+    <!-- 自动扫描的包名 -->
+    <context:component-scan base-package="com.hh" ></context:component-scan>
+
+    <!-- 默认的注解映射的支持 -->
+    <mvc:annotation-driven />
+
+    <!-- 设置默认的静态资源处理器，不设置配了视图解析器会报404错误 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 配置视图解析器，项目中用不到也可以不配 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/html/" />
+        <property name="suffix" value=".html" />
+    </bean>
+
+
+    <!-- ****************** hibernate validator 开始 ********************-->
+
+    <!-- 校验器 -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!-- hibernate校验器-->
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+        <!-- 指定校验使用的资源文件，在文件中配置校验错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+
+    <!-- 校验错误信息配置文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- 资源文件名， 可以不配用默认的，也可以配用自己自定义的 -->
+<!--        <property name="basenames">
+            <list>
+                <value></value>
+            </list>
+        </property>-->
+        <!-- 资源文件编码格式 -->
+        <property name="fileEncodings" value="utf-8" />
+        <!-- 对资源文件内容缓存时间，单位秒 -->
+        <property name="cacheSeconds" value="120" />
+    </bean>
+
+    <!-- 校验器注入到处理器适配器中 -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
+
+    <mvc:annotation-driven conversion-service="conversionService" validator="validator"></mvc:annotation-driven>
+
+    <!-- ****************** hibernate validator 结束 ********************-->
+
+</beans>

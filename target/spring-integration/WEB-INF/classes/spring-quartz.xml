@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd ">
+
+    <!-- 要执行任务的任务类。 -->
+    <bean id="testQuartz" class="com.hh.quartz.QuartzController"></bean>
+
+    <!-- 将需要执行的定时任务注入JOB中。 -->
+    <bean id="testJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="testQuartz"></property>
+        <!-- 任务类中需要执行的方法 -->
+        <property name="targetMethod" value="doSomething"></property>
+        <!-- 上一次未执行完成的，要等待有再执行。 -->
+        <property name="concurrent" value="false"></property>
+    </bean>
+
+    <!-- 基本的定时器，会绑定具体的任务。 -->
+    <bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="testJob"></property>
+        <property name="cronExpression" value="0 0 0 * * ?"/>
+    </bean>
+
+    <!--配置调度工厂-->
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="testTrigger"></ref>
+            </list>
+        </property>
+    </bean>
+
+</beans>

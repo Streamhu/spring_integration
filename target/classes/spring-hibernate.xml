@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 引入数据库配置参数文件jdbc.properties -->
+    <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
+
+    <!-- 数据源，加载jdbc驱动参数 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" lazy-init="false">
+        <!-- 注入datasource，给sessionfactoryBean内setdatasource提供数据源 -->
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+        <!-- 加载实体类的映射文件位置及名称 -->
+        <property name="mappingLocations" value="classpath:hibernate/*.hbm.xml"></property>
+    </bean>
+
+    <!-- 配置sessionFactory, 这个配合jpa， 在entity层加jpa注解配合使用，从而不需要映射文件了-->
+<!--    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        &lt;!&ndash; hibernate自动扫描 实体类&ndash;&gt;
+        <property name="packagesToScan">
+            <list>
+                <value>com.hh.hibernate</value>
+            </list>
+        </property>
+        &lt;!&ndash; hibernate属性 &ndash;&gt;
+        <property name="hibernateProperties">
+            <value>
+                hibernate.hbm2ddl.auto=${jdbc.hibernate.hbm2ddl.auto}
+                hibernate.dialect=${jdbc.hibernate.dialect}
+                hibernate.show_sql=${jdbc.hibernate.show_sql}
+            </value>
+        </property>
+    </bean>-->
+
+</beans>
